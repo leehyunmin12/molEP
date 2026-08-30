@@ -1,28 +1,124 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>main</title>
     <link rel="stylesheet" href="../style/main.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
 </head>
+
 <body>
-    <p>처음으로</p>
-    <div class="remainTime">
-        <p>공부시간 · 25:12 남음</p>
-    </div>
-    <div class="Pomodoro">
-        <p>공부시간 · 50분 중</p>
-        <p>25:12</p>
-        <button>일시정지</button>
-        <button>초기화</button>
-    </div>
-    <div class="nowPlaying"">
-        <p>지금 재생 중</p>
-        <a href="">다시 추천받기</a>
-    </div>
-    <div class="waiting">
-        <p>대기열 · 이번 1시간</p>
+    <div class="screen">
+        <div class="top-bar">
+            <a href="" class="go-first">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
+                    stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M19 12H5M12 19l-7-7 7-7" />
+                </svg>
+                처음으로
+            </a>
+            <div class="study-time">공부시간 · 25:12 남음</div>
+        </div>
+
+        <div class="card" id="pomodoro-card">
+            <div class="clock-container" id="clock-container">
+                <div class="clock-little"></div>
+                <div class="clock-num"></div>
+                <div class="clock-center"></div>
+            </div>
+            <div class="clock-studying">공부 시간 · 50분 중</div>
+            <div class="clock-remain">25:12</div>
+            <div class="button-container">
+                <button class="button" id="stop-button">
+                    일시정지
+                </button>
+                <button class="button" id="reset-button">
+                    초기화
+                </button>
+            </div>
+        </div>
+
+        <div class="card" id="now-play-card">
+            <div class="top-bar">
+                <div class="now-playing">지금 재생 중</div>
+                <a href="" class="again-recommend">
+                    다시 추천받기
+                </a>
+            </div>
+
+            <div class="album">
+                <div class="album-pic"></div>
+                <div class="info">
+                    <div class="song">잔잔한 오후</div>
+                    <div class="singer">권진아</div>
+                </div>
+
+            </div>
+            <div class="play-bar">
+                <div class="play-button">
+                    <div class="play-icon"></div>
+                </div>
+                <div class="time-text">1:18</div>
+                <div class="seek-track">
+                    <div class="seek-fill"></div>
+                </div>
+                <div class="time-text">3:24</div>
+            </div>
+        </div>
+
+        <div class="card" id="wait-card">
+            <div class="now-playing" id="wait">대기열 · 이번 1시간</div>
+            <div class="wait-container">
+                <div class="wait-num">02</div>
+                <div class="wait-pic"></div>
+                <div class="wait-info">
+                    <div class="wait-song">흐린 날의 산책</div>
+                    <div class="wait-singer">Sundae Ovaries</div>
+                </div>
+
+                <div class="wait-time">3:41</div>
+            </div>
+
+            <div class="wait-container">
+                <div class="wait-num">02</div>
+                <div class="wait-pic"></div>
+                <div class="wait-info">
+                    <div class="wait-song">흐린 날의 산책</div>
+                    <div class="wait-singer">Sundae Ovaries</div>
+                </div>
+
+                <div class="wait-time">3:41</div>
+            </div>
+
+
+            <div class="wait-container">
+                <div class="wait-num">02</div>
+                <div class="wait-pic"></div>
+                <div class="wait-info">
+                    <div class="wait-song">흐린 날의 산책</div>
+                    <div class="wait-singer">Sundae Ovaries</div>
+                </div>
+
+                <div class="wait-time">3:41</div>
+            </div>
+
+
+            <div class="wait-container">
+                <div class="wait-num">02</div>
+                <div class="wait-pic"></div>
+                <div class="wait-info">
+                    <div class="wait-song">흐린 날의 산책</div>
+                    <div class="wait-singer">Sundae Ovaries</div>
+                </div>
+
+                <div class="wait-time">3:41</div>
+            </div>
+        </div>
+
     </div>
 </body>
+<script src="../js/main.js"></script>
+
 </html>
