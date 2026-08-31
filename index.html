@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./styles/style.css">
+</head>
+<body>
+    <div class="main">
+        <h1 class="title">몰ep</h1>
+        <div class="main-icon"></div>
+        <div class="description">맑고 건조한 오후예요. <br>몰입하기 좋은 날이에요.</div>
+        <div class="main-info">
+            <div class="info-item">
+                <h3 id="temperature">27도</h3>
+                <p class="sub-info">기온</p>
+            </div>
+            <div class="info-item">
+                <h3 id="humidity">48%</h3>
+                <p class="sub-info">습도</p>
+            </div>
+            <div class="info-item">
+                <h3 id="weather">맑음</h3>
+                <p class="sub-info">날씨</p>
+            </div>
+        </div>
+        <button id="song-btn">오늘의 노래 추천받기</button>
+        <div class="area-info">관악구 신림동 기준 실시간 날씨</div>
+    </div>
+
+    <script type="module" src="./js/getSong.js"></script>
+    <script type="module" src="./js/getWeather.js"></script>
+</body>
+</html>
