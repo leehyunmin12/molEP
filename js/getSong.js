@@ -29,7 +29,7 @@ async function generateText(promptAI) {
         // API 응답 객체에서 텍스트 결과만 추출
         const resultText = data.candidates[0].content.parts[0].text;
         console.log(resultText);
-        return;
+        return resultText;
 
     } catch (error) {
         console.error('Gemini API 호출 중 오류 발생:', error);
@@ -42,6 +42,6 @@ const getSongBtn = document.getElementById("song-btn")
 getSongBtn.addEventListener("click", async () => {
     document.getElementById('song-btn').innerText = "로딩 중...."
     
-    await generateText("맑은 날씨에 맞는 노래 3곡 추천해줘. 가수명-노래명 형식으로만 대답해줘")
+    const resultText = await generateText("맑은 날씨에 맞는 노래 3곡 추천해줘. 가수명-노래명 형식으로만 대답해줘")
     location.href = 'main.html';
 });

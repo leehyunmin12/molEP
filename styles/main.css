@@ -163,6 +163,14 @@ body {
     height: 36px;
 }
 
+#start-button {
+    background-color: var(--clock-hour);
+    color: var(--div-bg);
+    padding: 10px 80px;
+    display: flex;
+    align-items: center;
+}
+
 #stop-button {
     background-color: var(--clock-hour);
     color: var(--div-bg);
