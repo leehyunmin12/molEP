@@ -49,7 +49,8 @@
             </div>
 
             <div class="album">
-                <div class="album-pic"></div>
+                <div id="player"></div>
+                    
                 <div class="info">
                     <div class="song">잔잔한 오후</div>
                     <div class="singer">권진아</div>
@@ -58,13 +59,13 @@
             </div>
             <div class="play-bar">
                 <div class="play-button">
-                    <div class="play-icon"></div>
+                    <button class="play-icon" id="play-icon" onclick="onStateChange()">▶</button>
                 </div>
-                <div class="time-text">1:18</div>
-                <div class="seek-track">
-                    <div class="seek-fill"></div>
-                </div>
-                <div class="time-text">3:24</div>
+                <div class="time-text" id="current"></div>
+
+                <input type="range" class="seek-track" id="seekBar" value="0" max="100" step="0.1">
+
+                <div class="time-text" id="duration"></div>
             </div>
         </div>
 
@@ -116,9 +117,9 @@
                 <div class="wait-time">3:41</div>
             </div>
         </div>
-
     </div>
 </body>
-<script src="../js/main.js"></script>
+<script src="../js/main_clock.js"></script>
+<script src="../js/main_youtube.js"></script>
 
 </html>
