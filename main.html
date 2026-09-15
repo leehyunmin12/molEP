@@ -1,124 +1,227 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>main</title>
-    <link rel="stylesheet" href="./styles/main.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-</head>
+    <link rel="stylesheet" href="./styles/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined"
+    />
+  </head>
 
-<body>
+  <body>
     <div class="screen">
+      <div class="top-bar">
+        <a href="sunny.html" class="go-first">
+          <svg
+            width="18"
+            height="18"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            <path d="M19 12H5M12 19l-7-7 7-7" />
+          </svg>
+          처음으로
+        </a>
+        <div class="study-time">공부시간 · 25:12 남음</div>
+      </div>
+
+      <div class="card" id="pomodoro-card">
+        <canvas
+          id="canvas"
+          width="200"
+          height="200"
+          style="background-color: #fff"
+        >
+        </canvas>
+
+        <script>
+          var canvas = document.getElementById("canvas");
+          var ctx = canvas.getContext("2d");
+          var radius = canvas.height / 2;
+          ctx.translate(radius, radius);
+          radius = radius * 0.9;
+          setInterval(drawClock, 1000);
+
+          function drawClock() {
+            drawFace(ctx, radius);
+            drawNumbers(ctx, radius);
+            drawTime(ctx, radius);
+          }
+
+          function drawFace(ctx, radius) {
+            var grad;
+            ctx.beginPath();
+            ctx.arc(0, 0, radius, 0, 2 * Math.PI);
+            ctx.fillStyle = "white";
+            ctx.fill();
+            grad = ctx.createRadialGradient(
+              0,
+              0,
+              radius * 0.95,
+              0,
+              0,
+              radius * 1.05,
+            );
+            grad.addColorStop(0, "#333");
+            grad.addColorStop(0.5, "white");
+            grad.addColorStop(1, "#333");
+            ctx.strokeStyle = grad;
+            ctx.lineWidth = radius * 0.1;
+            ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
+            ctx.fillStyle = "#333";
+            ctx.fill();
+          }
+
+          function drawNumbers(ctx, radius) {
+            var ang;
+            var num;
+            ctx.font = radius * 0.15 + "px arial";
+            ctx.textBaseline = "middle";
+            ctx.textAlign = "center";
+            for (num = 1; num < 13; num++) {
+              ang = (num * Math.PI) / 6;
+              ctx.rotate(ang);
+              ctx.translate(0, -radius * 0.85);
+              ctx.rotate(-ang);
+              ctx.fillText(num.toString(), 0, 0);
+              ctx.rotate(ang);
+              ctx.translate(0, radius * 0.85);
+              ctx.rotate(-ang);
+            }
+          }
+
+          function drawTime(ctx, radius) {
+            var now = new Date();
+            var hour = now.getHours();
+            var minute = now.getMinutes();
+            var second = now.getSeconds();
+            //hour
+            hour = hour % 12;
+            hour =
+              (hour * Math.PI) / 6 +
+              (minute * Math.PI) / (6 * 60) +
+              (second * Math.PI) / (360 * 60);
+            drawHand(ctx, hour, radius * 0.5, radius * 0.07);
+            //minute
+            minute = (minute * Math.PI) / 30 + (second * Math.PI) / (30 * 60);
+            drawHand(ctx, minute, radius * 0.8, radius * 0.07);
+            // second
+            second = (second * Math.PI) / 30;
+            drawHand(ctx, second, radius * 0.9, radius * 0.02);
+          }
+
+          function drawHand(ctx, pos, length, width) {
+            ctx.beginPath();
+            ctx.lineWidth = width;
+            ctx.lineCap = "round";
+            ctx.moveTo(0, 0);
+            ctx.rotate(pos);
+            ctx.lineTo(0, -length);
+            ctx.stroke();
+            ctx.rotate(-pos);
+          }
+        </script>
+        <div class="clock-studying">공부 시간 · 50분 중</div>
+        <div class="clock-remain">50:00</div>
+        <div class="button-container">
+          <button class="button" id="start-button">시작</button>
+          <button class="button" id="reset-button">초기화</button>
+        </div>
+      </div>
+
+      <div class="card" id="now-play-card">
         <div class="top-bar">
-            <a href="index.html" class="go-first">
-                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"
-                    stroke-linecap="round" stroke-linejoin="round">
-                    <path d="M19 12H5M12 19l-7-7 7-7" />
-                </svg>
-                처음으로
-            </a>
-            <div class="study-time">공부시간 · 25:12 남음</div>
+          <div class="now-playing">지금 재생 중</div>
+          <a href="" class="again-recommend"> 다시 추천받기 </a>
         </div>
 
-        <div class="card" id="pomodoro-card">
-            <!-- <div class="clock-container" id="clock-container">
-                <div class="clock-little"></div>
-                <div class="clock-num"></div>
-                <div class="clock-center"></div>
-            </div> -->
-            <div class="clock-studying">공부 시간 · 50분 중</div>
-            <div class="clock-remain">50:00</div>
-            <div class="button-container">
-                <button class="button" id="start-button">
-                    시작
-                </button>
-                <button class="button" id="reset-button">
-                    초기화
-                </button>
-            </div>
+        <div class="album">
+          <div id="player"></div>
+
+          <div class="info">
+            <div class="song">잔잔한 오후</div>
+            <div class="singer">권진아</div>
+          </div>
+        </div>
+        <div class="play-bar">
+          <div class="play-button">
+            <button class="play-icon" id="play-icon" onclick="onStateChange()">
+              ▶
+            </button>
+          </div>
+          <div class="time-text" id="current"></div>
+
+          <input
+            type="range"
+            class="seek-track"
+            id="seekBar"
+            value="0"
+            max="100"
+            step="0.1"
+          />
+
+          <div class="time-text" id="duration"></div>
+        </div>
+      </div>
+
+      <div class="card" id="wait-card">
+        <div class="now-playing" id="wait">대기열 · 이번 1시간</div>
+        <div class="wait-container">
+          <div class="wait-num">02</div>
+          <div class="wait-pic"></div>
+          <div class="wait-info">
+            <div class="wait-song">흐린 날의 산책</div>
+            <div class="wait-singer">Sundae Ovaries</div>
+          </div>
+
+          <div class="wait-time">3:41</div>
         </div>
 
-        <div class="card" id="now-play-card">
-            <div class="top-bar">
-                <div class="now-playing">지금 재생 중</div>
-                <a href="" class="again-recommend">
-                    다시 추천받기
-                </a>
-            </div>
+        <div class="wait-container">
+          <div class="wait-num">02</div>
+          <div class="wait-pic"></div>
+          <div class="wait-info">
+            <div class="wait-song">흐린 날의 산책</div>
+            <div class="wait-singer">Sundae Ovaries</div>
+          </div>
 
-            <div class="album">
-                <div class="album-pic"></div>
-                <div class="info">
-                    <div class="song">잔잔한 오후</div>
-                    <div class="singer">권진아</div>
-                </div>
-
-            </div>
-            <div class="play-bar">
-                <div class="play-button">
-                    <div class="play-icon"></div>
-                </div>
-                <div class="time-text">1:18</div>
-                <div class="seek-track">
-                    <div class="seek-fill"></div>
-                </div>
-                <div class="time-text">3:24</div>
-            </div>
+          <div class="wait-time">3:41</div>
         </div>
 
-        <div class="card" id="wait-card">
-            <div class="now-playing" id="wait">대기열 · 이번 1시간</div>
-            <div class="wait-container">
-                <div class="wait-num">02</div>
-                <div class="wait-pic"></div>
-                <div class="wait-info">
-                    <div class="wait-song">흐린 날의 산책</div>
-                    <div class="wait-singer">Sundae Ovaries</div>
-                </div>
+        <div class="wait-container">
+          <div class="wait-num">02</div>
+          <div class="wait-pic"></div>
+          <div class="wait-info">
+            <div class="wait-song">흐린 날의 산책</div>
+            <div class="wait-singer">Sundae Ovaries</div>
+          </div>
 
-                <div class="wait-time">3:41</div>
-            </div>
-
-            <div class="wait-container">
-                <div class="wait-num">02</div>
-                <div class="wait-pic"></div>
-                <div class="wait-info">
-                    <div class="wait-song">흐린 날의 산책</div>
-                    <div class="wait-singer">Sundae Ovaries</div>
-                </div>
-
-                <div class="wait-time">3:41</div>
-            </div>
-
-
-            <div class="wait-container">
-                <div class="wait-num">02</div>
-                <div class="wait-pic"></div>
-                <div class="wait-info">
-                    <div class="wait-song">흐린 날의 산책</div>
-                    <div class="wait-singer">Sundae Ovaries</div>
-                </div>
-
-                <div class="wait-time">3:41</div>
-            </div>
-
-
-            <div class="wait-container">
-                <div class="wait-num">02</div>
-                <div class="wait-pic"></div>
-                <div class="wait-info">
-                    <div class="wait-song">흐린 날의 산책</div>
-                    <div class="wait-singer">Sundae Ovaries</div>
-                </div>
-
-                <div class="wait-time">3:41</div>
-            </div>
+          <div class="wait-time">3:41</div>
         </div>
 
+        <div class="wait-container">
+          <div class="wait-num">02</div>
+          <div class="wait-pic"></div>
+          <div class="wait-info">
+            <div class="wait-song">흐린 날의 산책</div>
+            <div class="wait-singer">Sundae Ovaries</div>
+          </div>
+
+          <div class="wait-time">3:41</div>
+        </div>
+      </div>
     </div>
-</body>
-<script src="./js/main.js"></script>
-
+  </body>
+  <script src="./js/main.js"></script>
+  <script src="./js/main_clock.js"></script>
+  <script src="./js/main_youtube.js"></script>
 </html>

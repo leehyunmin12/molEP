@@ -1,21 +1,4 @@
-let min = 49,
-  sec = 59;
-
-function Timer() {
-  const date = new Date();
-  const timer = document.querySelector(".clock-remain");
-  console.log(date);
-
-  startTimer = setInterval(() => {
-    timer.innerText = `${min.toString().padStart(2, 0)}:${sec.toString().padStart(2, 0)}`;
-    if (sec === 0) {
-      sec = 60;
-      min--;
-    }
-    sec--;
-  }, 1000);
-}
-
+  
 
 const stopBtn = document.getElementById("stop-button");
 stopBtn.addEventListener("click", () => {

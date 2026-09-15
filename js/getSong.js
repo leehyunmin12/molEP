@@ -42,6 +42,9 @@ const getSongBtn = document.getElementById("song-btn")
 getSongBtn.addEventListener("click", async () => {
     document.getElementById('song-btn').innerText = "로딩 중...."
     
-    const resultText = await generateText("맑은 날씨에 맞는 노래 3곡 추천해줘. 가수명-노래명 형식으로만 대답해줘")
-    location.href = 'main.html';
+    const resultText = await generateText("맑은 날씨에 맞는 노래 3곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 쓸데없는 말은 쓰지마");
+    let arr = resultText.split("-");
+    arr = arr.toString().split("\n");
+    console.log(arr)
+    // location.href = 'main.html';
 });
