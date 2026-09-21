@@ -46,5 +46,5 @@ getSongBtn.addEventListener("click", async () => {
     let arr = resultText.split("-");
     arr = arr.toString().split("\n");
     console.log(arr)
-    // location.href = 'main.html';
+    location.href = 'main.html';
 });
