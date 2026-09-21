@@ -10,6 +10,9 @@
 </head>
 
 <body>
+
+
+
     <div class="screen">
         <div class="top-bar">
             <a href="" class="go-first">
@@ -31,7 +34,7 @@
             <div class="clock-studying">공부 시간 · 50분 중</div>
             <div class="clock-remain">25:12</div>
             <div class="button-container">
-                <button class="button" id="stop-button">
+                <button class="button" id="stop-button" onclick="buttonState()">
                     일시정지
                 </button>
                 <button class="button" id="reset-button">
@@ -50,7 +53,7 @@
 
             <div class="album">
                 <div id="player"></div>
-                    
+
                 <div class="info">
                     <div class="song">잔잔한 오후</div>
                     <div class="singer">권진아</div>
@@ -82,7 +85,7 @@
                 <div class="wait-time">3:41</div>
             </div>
 
-            <div class="wait-container">
+            <div class="wait-container" onclick="">
                 <div class="wait-num">02</div>
                 <div class="wait-pic"></div>
                 <div class="wait-info">
@@ -121,5 +124,5 @@
 </body>
 <script src="../js/main_clock.js"></script>
 <script src="../js/main_youtube.js"></script>
-
+<script src="../js/main_pomodoro.js"></script>
 </html>

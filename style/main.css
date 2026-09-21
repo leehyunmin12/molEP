@@ -13,6 +13,14 @@
     box-sizing: border-box;
 }
 
+button {
+    cursor: pointer;
+}
+
+input {
+    cursor: pointer;
+}
+
 body {
     padding: 0;
     margin: 0;
@@ -240,6 +248,7 @@ body {
     border: solid 1px var(--text);
     border-radius: 50%;
     background-color: var(--div-bg);
+    
 }
 
 .time-text {
@@ -261,7 +270,6 @@ body {
     left: 0;
     height: 100%;
     width: 38%;
-    /* 재생 진행률 (1:18 / 3:24 ≈ 38%) */
     background: var(--text);
     border-radius: 2px;
 }
@@ -277,6 +285,7 @@ body {
     gap: 12px;
     height: 60px;
     align-items: center;
+    cursor: pointer;
 }
 
 .wait-num {
