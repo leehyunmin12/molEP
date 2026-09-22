@@ -1,0 +1,68 @@
+<!-- index.html -->
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+  </head>
+  <body>
+    <script type="module">
+      import config from "/js/config.js";
+
+      const { OPEN_WEATHER_API_KEY } = config;
+
+      function getWeatherTheme(data) {
+        const weather = data.weather[0].description;
+        const id = data.weather[0].id;
+        const humidity = data.main.humidity;
+
+        console.log(weather, id, humidity);
+
+        if (id === 801 || id === 802 || id === 803) return "sunny";
+        else if (id === 804) return "cloudy";
+        else return "rain";
+      }
+
+      const getSuccess = async (position) => {
+        console.log(position);
+        const lon = position.coords.longitude;
+        const lat = position.coords.latitude;
+
+        console.log(lon, lat);
+        const OPEN_WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric&lang=kr`;
+
+        console.log(OPEN_WEATHER_URL);
+
+        try {
+          const response = await fetch(OPEN_WEATHER_URL);
+          if (!response.ok) {
+            throw new Error(`에러 발생 ${response.status}`);
+          }
+
+          const data = await response.json();
+
+          sessionStorage.setItem("WeatherData", JSON.stringify(data));
+          const theme = getWeatherTheme(data);
+          location.href = `${theme}.html`;
+        } catch (e) {
+          console.log("예외가 발생하였습니다. " + e);
+        }
+      };
+
+      const getError = () => {
+        console.log("Error 발생");
+      };
+
+      const options = {
+        enableHighAccuracy: true,
+        timeout: 10000,
+      };
+
+      window.navigator.geolocation.getCurrentPosition(
+        getSuccess,
+        getError,
+        options,
+      );
+    </script>
+    <h1 style="text-align: center">날씨 확인 중....</h1>
+  </body>
+</html>
