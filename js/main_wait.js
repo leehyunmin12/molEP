@@ -1,9 +1,9 @@
-function waitMusic() {
+function waitMusic(num, song, singer, time) {
 
     const waitCard = document.getElementById('wait-card');
 
     const wNum = document.createElement('div');
-    wNum.textContent = '2';
+    wNum.textContent = num;
     wNum.className = 'wait-num';
 
     const wPic = document.createElement('div');
@@ -11,11 +11,11 @@ function waitMusic() {
 
     const wsong = document.createElement('div');
     wsong.className = 'wait-song';
-    wsong.textContent = '흐린 날의 산책';
+    wsong.textContent = song;
 
     const wsinger = document.createElement('div');
     wsinger.className = 'wait-singer';
-    wsinger.textContent = 'Sundae Ovaries';
+    wsinger.textContent = singer;
 
     const wInfo = document.createElement('div');
     wInfo.className = 'wait-info';
@@ -24,7 +24,7 @@ function waitMusic() {
 
     const wTime = document.createElement('div');
     wTime.className = 'wait-time';
-    wTime.textContent = '3:41';
+    wTime.textContent = time;
     
     const wContainer = document.createElement('div');
     wContainer.className = 'wait-container';
@@ -35,5 +35,5 @@ function waitMusic() {
 
     waitCard.appendChild(wContainer);
 }
-waitMusic();
-waitMusic();
+waitMusic('2', '흐린 날의 산책', 'Sundae Ovaries', '3:41');
+waitMusic('3', '흐린 날의 산책', 'Sundae Ovaries', '3:41');
