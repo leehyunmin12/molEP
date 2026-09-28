@@ -13,14 +13,6 @@
     box-sizing: border-box;
 }
 
-button {
-    cursor: pointer;
-}
-
-input {
-    cursor: pointer;
-}
-
 body {
     padding: 0;
     margin: 0;
@@ -149,6 +141,7 @@ body {
     color: var(--text-blur);
     font-size: 12px;
     font-weight: 400;
+    margin-top: 12px;
 }
 
 .clock-remain {
@@ -169,6 +162,14 @@ body {
     border: solid 1px var(--text);
     border-radius: 4px;
     height: 36px;
+}
+
+#start-button {
+    background-color: var(--clock-hour);
+    color: var(--div-bg);
+    padding: 10px 80px;
+    display: flex;
+    align-items: center;
 }
 
 #stop-button {
@@ -248,7 +249,10 @@ body {
     border: solid 1px var(--text);
     border-radius: 50%;
     background-color: var(--div-bg);
-    
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .time-text {
@@ -258,6 +262,7 @@ body {
 
 .seek-track {
     flex: 1;
+    /* 남는 공간을 다 차지 */
     height: 4px;
     background: #dddddd;
     border-radius: 2px;
@@ -270,6 +275,7 @@ body {
     left: 0;
     height: 100%;
     width: 38%;
+    /* 재생 진행률 (1:18 / 3:24 ≈ 38%) */
     background: var(--text);
     border-radius: 2px;
 }
@@ -285,7 +291,6 @@ body {
     gap: 12px;
     height: 60px;
     align-items: center;
-    cursor: pointer;
 }
 
 .wait-num {
@@ -323,4 +328,3 @@ body {
     display: flex;
     justify-content: right;
 }
-

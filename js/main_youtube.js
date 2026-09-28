@@ -23,7 +23,8 @@ function onYouTubeIframeAPIReady() {
     });
 }
 // 자동 재생 코드
-function onPlayerReady() {
+function onPlayerReady(event) {
+    event.target.playVideo();
     duration_setting();
     current_setting();
 }
@@ -73,7 +74,7 @@ function playVideo() {
 function duration_setting() {
     const duration = document.querySelector('#duration');
     const total_sec = player.getDuration();
-    duration.innerText = String(parseInt(total_sec / 60)).padStart(2, "0") + ':' + String(parseInt(total_sec % 60)).padStart(2, "0");
+    duration.innerText = parseInt(total_sec / 60) + ':' + (total_sec % 60);
 }
 // 현재 영상 위치 글자로 뛰우기 함수
 function current_setting() {
@@ -81,7 +82,7 @@ function current_setting() {
     const seekBar = document.querySelector('#seekBar');
 
     const current_sec = player.getCurrentTime();
-    current.innerText = String(parseInt(current_sec / 60)).padStart(2, "0") + ':' + String(parseInt(current_sec % 60)).padStart(2, "0");
+    current.innerText = parseInt(current_sec / 60) + ':' + parseInt(current_sec % 60);
 
     if (player.getDuration() > 0) {
         seekBar.max = player.getDuration();
