@@ -6,6 +6,9 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let player;
 
+let songs = localStorage.getItem('songs');
+console.log(songs);
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         // 화면 크기 조정

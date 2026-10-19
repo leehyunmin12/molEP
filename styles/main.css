@@ -65,7 +65,6 @@ body {
     border: solid 1px var(--text);
     border-radius: 8px;
 }
-
 /* --------------------------------- pomodoro-card 부분 --------------------------------- */
 .card {
     background-color: var(--div-bg);
