@@ -1,3 +1,30 @@
+const musics = window.localStorage.getItem('songs');
+const result = window.localStorage.getItem('result');
+
+const music = JSON.parse(musics);
+const info = JSON.parse(result);
+
+const title = [];
+const singer = [];
+const song = [];
+const videoId = [];
+
+const length = music.length-1;
+
+const playlist = [];
+
+for(let x of info) {
+    playlist["title"].push(x[0]);
+    singer.push(x[1]);
+    song.push("2:34");
+}
+for(let x of music) {
+    videoId.push(x.videoId);
+}
+
+console.log(videoId);   
+
+
 function waitMusic(num, song, singer, time) {
 
     const waitCard = document.getElementById('wait-card');
@@ -25,7 +52,7 @@ function waitMusic(num, song, singer, time) {
     const wTime = document.createElement('div');
     wTime.className = 'wait-time';
     wTime.textContent = time;
-    
+
     const wContainer = document.createElement('div');
     wContainer.className = 'wait-container';
     wContainer.appendChild(wNum);
@@ -35,5 +62,8 @@ function waitMusic(num, song, singer, time) {
 
     waitCard.appendChild(wContainer);
 }
-waitMusic('2', '흐린 날의 산책', 'Sundae Ovaries', '3:41');
-waitMusic('3', '흐린 날의 산책', 'Sundae Ovaries', '3:41');
+
+// 몇번 출력할지 for문으로 반복!
+for (let i = 1; i <= length; i++) {
+    waitMusic(i, title[i], singer[i], song[i]);
+}
