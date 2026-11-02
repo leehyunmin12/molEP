@@ -50,6 +50,7 @@ getSongBtn.addEventListener("click", async () => {
         result.map(x => getYTDatas(`${x[0].trim()} ${x[1].trim()}`))
     );
     console.log(stk);
+    console.log(result);
     // arr = arr.toString().split("\n");
     console.log(JSON.stringify(stk));
     window.localStorage.setItem('songs', JSON.stringify(stk));
