@@ -54,8 +54,9 @@
       };
 
       const options = {
-        enableHighAccuracy: true,
-        timeout: 10000,
+        enableHighAccuracy: false, // 대략적인 위치로 확인
+        timeout: 5000,
+        maximumAge: 10 * 60 * 1000, // 10분 이내 캐시된 위치 재사용
       };
 
       window.navigator.geolocation.getCurrentPosition(
