@@ -14,7 +14,7 @@
   <body>
     <div class="screen">
       <div class="top-bar">
-        <a href="sunny.html" class="go-first">
+        <a href="index.html" class="go-first">
           <svg
             width="18"
             height="18"
@@ -29,7 +29,7 @@
           </svg>
           처음으로
         </a>
-        <div class="study-time">공부시간 · 50:00 남음</div>
+        <div class="study-time">쉬는시간까지 · 50:00 남음</div>
       </div>
 
       <div class="card" id="pomodoro-card">
@@ -75,6 +75,19 @@
             ctx.strokeStyle = grad;
             ctx.lineWidth = radius * 0.1;
             ctx.stroke();
+            if (window.ringProgress > 0) {
+              ctx.beginPath();
+              ctx.arc(
+                0,
+                0,
+                radius,
+                -Math.PI / 2,
+                -Math.PI / 2 + window.ringProgress * 2 * Math.PI,
+              );
+              ctx.strokeStyle = window.ringColor || "#ff6b6b";
+              ctx.lineWidth = radius * 0.1;
+              ctx.stroke();
+            }
             ctx.beginPath();
             ctx.arc(0, 0, radius * 0.1, 0, 2 * Math.PI);
             ctx.fillStyle = "#333";
@@ -121,6 +134,7 @@
 
           function drawHand(ctx, pos, length, width) {
             ctx.beginPath();
+            ctx.strokeStyle = "#333";
             ctx.lineWidth = width;
             ctx.lineCap = "round";
             ctx.moveTo(0, 0);

@@ -6,7 +6,7 @@ const temp = data.main.temp;
 const humidity = data.main.humidity;
 
 document.getElementById("weather").innerText = weather;
-document.getElementById("temperature").innerText = parseInt(temp) + "도";
+document.getElementById("temperature").innerText = parseInt(temp) + "°";
 document.getElementById("humidity").innerText = humidity + "%";
 
 console.log(weather, temp, humidity);

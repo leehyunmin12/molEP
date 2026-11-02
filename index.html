@@ -15,9 +15,10 @@
         const id = data.weather[0].id;
         const humidity = data.main.humidity;
 
+        console.log(data)
         console.log(weather, id, humidity);
 
-        if (id === 801 || id === 802 || id === 803) return "sunny";
+        if (id === 800 || id === 801 || id === 802 || id === 803) return "sunny";
         else if (id === 804) return "cloudy";
         else return "rain";
       }
