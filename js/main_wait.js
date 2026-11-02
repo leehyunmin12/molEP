@@ -4,25 +4,19 @@ const result = window.localStorage.getItem('result');
 const music = JSON.parse(musics);
 const info = JSON.parse(result);
 
-const title = [];
-const singer = [];
-const song = [];
-const videoId = [];
-
-const length = music.length-1;
+const length = music.length - 1;
 
 const playlist = [];
 
-for(let x of info) {
-    playlist["title"].push(x[0]);
-    singer.push(x[1]);
-    song.push("2:34");
+for (let i = 0; i < info.length; i++) {
+    let object = {};
+    object["title"] = info[i][1];
+    object["singer"] = info[i][0];
+    object["songLength"] = "2:34";
+    object["videoId"] = music[i].videoId;
+    playlist.push(object);
 }
-for(let x of music) {
-    videoId.push(x.videoId);
-}
-
-console.log(videoId);   
+console.log(playlist);
 
 
 function waitMusic(num, song, singer, time) {
@@ -64,6 +58,8 @@ function waitMusic(num, song, singer, time) {
 }
 
 // 몇번 출력할지 for문으로 반복!
-for (let i = 1; i <= length; i++) {
-    waitMusic(i, title[i], singer[i], song[i]);
+let cnt = 1;
+for (let x of playlist) {
+    waitMusic(cnt, x.title, x.singer, x.songLength);
+    cnt++;
 }
