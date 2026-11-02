@@ -135,8 +135,8 @@
                 <div id="player"></div>
 
                 <div class="info">
-                    <div class="song">잔잔한 오후</div>
-                    <div class="singer">권진아</div>
+                    <div class="song" id="song">${p.title}</div>
+                    <div class="singer" id="singer">권진아</div>
                 </div>
 
             </div>
@@ -162,5 +162,11 @@
 <script src="./js/main_youtube.js"></script>
 <script src="./js/main_pomodoro.js"></script>
 <script src="./js/main_wait.js"></script>
+<script>
+    let p = window.localStorage.getItem('present');
+    p = JSON.parse(p);
+    document.getElementById('song').textContent = p.title;
+    document.getElementById('singer').textContent = p.singer;
+</script>
 
 </html>
