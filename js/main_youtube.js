@@ -28,7 +28,8 @@ function onYouTubeIframeAPIReady() {
     });
 }
 // 자동 재생 코드
-function onPlayerReady() {
+function onPlayerReady(event) {
+    event.target.playVideo();
     duration_setting();
     current_setting();
 }
