@@ -6,9 +6,6 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let player;
 
-let songs = localStorage.getItem('songs');
-console.log(songs);
-
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         // 화면 크기 조정
@@ -26,7 +23,8 @@ function onYouTubeIframeAPIReady() {
     });
 }
 // 자동 재생 코드
-function onPlayerReady() {
+function onPlayerReady(event) {
+    event.target.playVideo();
     duration_setting();
     current_setting();
 }

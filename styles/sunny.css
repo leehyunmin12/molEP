@@ -9,38 +9,52 @@ body {
   height: 100vh;
   justify-content: center;
   align-items: center;
-  background-color: #F7F6F2;
+  background: linear-gradient(180deg, #45B2FA 0%, #FFFFFF 70%, #FFFFFF 100%);
 }
 
 .title {
-    color: #E8A33D;
+    color: #FFFFFF;
+    font-size: 28px;
+    margin: 0 0 16px;
+}
+
+.title-sub {
+    font-size: 18px;
+    font-weight: normal;
+}
+
+.temperature {
+    color: #FFFFFF;
+    font-size: 56px;
+    font-weight: bold;
+    line-height: 1;
+    margin-top: 10px;
+    margin-bottom: 24px;
+}
+
+.main > img {
+  width: 250px;
+  margin: 12px 0 20px;
 }
 
 .description {
+    color: #fff;
   text-align: center;
-  font-size: 20px;
+  font-size: 15px;
   font-weight: bold;
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
-
-.main-icon {
-  width: 80px;
-  height: 80px;
-  background-color: #e27435;
-  border-radius: 100%;
-  margin-bottom: 20px;
-}
-
 .main-info {
     display: flex;
 }
 
 .info-item {
-    margin: 10px;
+    margin: 10px 16px;
     text-align: center;
     margin-bottom: 0px;
     padding-bottom: 0px;
     line-height: 30%;
+    color: #42A4E6;
 }
 
 .sub-info {
@@ -48,19 +62,22 @@ body {
 }
 
 #song-btn {
-    width: 75%;
-    height: 45px;
-    margin-top: 20px;
+    width: 260px;
+    height: 48px;
+    margin-top: 16px;
     background-color: #fff;
     border: solid 1px #000;
-    font-weight: bold;
+    border-radius: 8px;
+    color: #42A4E6;
+    font-size: 14px;
+    font-weight: 500;
 }
 #song-btn:hover {
     background-color: #e7e7e7;
 }
 
 .area-info {
-    margin-top: 20px;
-    font-size: 12px;
+    margin-top: 16px;
+    font-size: 11px;
     color: #646464;
 }
