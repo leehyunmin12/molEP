@@ -1,11 +1,14 @@
 body {
-    margin: 0 auto;
+    margin: 0;
+    background-color: #1A1A18; /* 폰 화면 바깥 배경 */
 }
 
 .main {
   display: flex;
   flex-direction: column;
-  width: 100%;
+  width: 390px;
+  max-width: 100%;
+  margin: 0 auto;
   height: 100vh;
   justify-content: center;
   align-items: center;

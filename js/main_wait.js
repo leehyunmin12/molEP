@@ -1,29 +1,5 @@
-const musics = window.localStorage.getItem('songs');
-const result = window.localStorage.getItem('result');
-
-const music = JSON.parse(musics);
-const info = JSON.parse(result);
-
-const title = [];
-const singer = [];
-const song = [];
-const videoId = [];
-
-const length = music.length-1;
-
-const playlist = [];
-
-for(let x of info) {
-    playlist["title"].push(x[0]);
-    singer.push(x[1]);
-    song.push("2:34");
-}
-for(let x of music) {
-    videoId.push(x.videoId);
-}
-
-console.log(videoId);   
-
+// getSong.js가 저장한 추천 결과: [[가수, 노래제목], ...]
+const info = JSON.parse(window.localStorage.getItem('result')) || [];
 
 function waitMusic(num, song, singer, time) {
 
@@ -63,7 +39,9 @@ function waitMusic(num, song, singer, time) {
     waitCard.appendChild(wContainer);
 }
 
-// 몇번 출력할지 for문으로 반복!
-for (let i = 1; i <= length; i++) {
-    waitMusic(i, title[i], singer[i], song[i]);
-}
+// 추천받은 곡들을 대기열에 표시
+info.forEach((x, i) => {
+    const singer = x[0].trim();
+    const title = (x[1] || '').trim();
+    waitMusic(i + 1, title, singer, '');
+});
