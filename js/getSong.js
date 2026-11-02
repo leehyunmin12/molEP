@@ -46,7 +46,7 @@ async function recommendSongs(btn) {
     btn.innerText = "로딩 중...."
 
     try {
-        const resultText = await generateText("맑은 날씨에 맞는 노래 3곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마");
+        const resultText = await generateText("맑은 날씨에 맞는 노래 10곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마");
         let arr = resultText.split(",");
         let result = arr.map(arr => arr.split("-"));
         const stk = await Promise.all(
