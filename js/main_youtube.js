@@ -1,3 +1,5 @@
+//import wait from "./main_wait";
+
 // api 그 설명서에 나온 기본 설정
 let tag = document.createElement('script');
 tag.src = "https://www.youtube.com/iframe_api";
@@ -6,13 +8,17 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let player;
 
+let songs = localStorage.getItem('present');
+songs = JSON.parse(songs);
+console.log(songs);
+
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
         // 화면 크기 조정
         height: '180',
         width: '300',
         // 어느 영상인지 구분하는 Id
-        videoId: 'YD8yJdVIiM0',
+        videoId: songs.videoId,
         playerVars: {
             'playsinLine': 1
         },
@@ -24,7 +30,7 @@ function onYouTubeIframeAPIReady() {
 }
 // 자동 재생 코드
 function onPlayerReady(event) {
-    event.target.playVideo();
+    // event.target.playVideo();
     duration_setting();
     current_setting();
 }
@@ -34,9 +40,31 @@ function onPlayerReady(event) {
 let timer = null;
 function onPlayerStateChange(event) {
     if (event.data == YT.PlayerState.PLAYING) {
+        // 곡이 바뀌면 총 길이도 다시 표시
+        duration_setting();
         clearInterval(timer);
         timer = setInterval(current_setting, 100);
     }
+    else if(event.data == YT.PlayerState.ENDED) {
+        renderWaitItem();
+        playPresent();
+    }
+}
+
+// present에 저장된 곡으로 영상, 제목, 가수 바꾸기
+function playPresent() {
+    let present = JSON.parse(localStorage.getItem('present'));
+    // 대기열이 다 끝났으면 멈춤
+    if (!present) {
+        return;
+    }
+    player.loadVideoById(present.videoId);
+    document.getElementById('song').textContent = present.title;
+    document.getElementById('singer').textContent = present.singer;
+
+    // loadVideoById는 자동 재생이라 아이콘도 재생 중으로 맞춤
+    state = true;
+    document.querySelector('#play-icon').innerText = '⏸';
 }
 
 

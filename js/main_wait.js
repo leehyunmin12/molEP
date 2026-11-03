@@ -1,7 +1,44 @@
-// getSong.js가 저장한 추천 결과: [[가수, 노래제목], ...]
-const info = JSON.parse(window.localStorage.getItem('result')) || [];
+import config from "./config.js";
 
-function waitMusic(num, song, singer, time) {
+const { YOUTUBE_DATA_API_KEY } = config;
+// ----------------------------- 초깃값 형성----------------------
+const musics = window.localStorage.getItem('songs');
+const result = window.localStorage.getItem('result');
+
+const music = JSON.parse(musics);
+const info = JSON.parse(result);
+
+const length = music.length - 1;
+
+const playlist = [];
+
+for (let i = 0; i < info.length; i++) {
+    let object = {};
+    object["title"] = info[i][1];
+    object["singer"] = info[i][0];
+    object["songLength"] = "2:34";
+    object["videoId"] = music[i].videoId;
+    playlist.push(object);
+}
+console.log(playlist);
+window.localStorage.setItem('PLAYLIST', JSON.stringify(playlist));
+// -----------------------------영상 길이부분----------------------------------------
+
+async function songDuration(vI) {
+    const vParam = new URLSearchParams({
+        key: YOUTUBE_DATA_API_KEY,
+        id: vI,
+        part: 'contentDetails',
+    })
+    const vRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?${vParam}`);
+    const vData = await vRes.json();
+    return vData;
+}
+console.log(songDuration('59y92uRqV7g'));
+// console.log(vData);
+// ----------------------------- 화면에 뿌리기 -------------------
+
+function renderWaitMusic(num, song, singer, time) {
 
     const waitCard = document.getElementById('wait-card');
 
@@ -39,9 +76,28 @@ function waitMusic(num, song, singer, time) {
     waitCard.appendChild(wContainer);
 }
 
-// 추천받은 곡들을 대기열에 표시
-info.forEach((x, i) => {
-    const singer = x[0].trim();
-    const title = (x[1] || '').trim();
-    waitMusic(i + 1, title, singer, '');
-});
+// 몇번 출력할지 for문으로 반복!
+function renderWaitItem() {
+    // 기존 대기열 지우기 (제목 #wait는 남김)
+    document.querySelectorAll('.wait-container').forEach(el => el.remove());
+
+    let pl = window.localStorage.getItem('PLAYLIST');
+    pl = JSON.parse(pl);
+    // 더 꺼낼 곡이 없으면 present를 비우고 끝냄
+    if (pl.length === 0) {
+        window.localStorage.removeItem('present');
+        return;
+    }
+    let present = pl.shift();
+    window.localStorage.setItem('present', JSON.stringify(present));
+    window.localStorage.setItem('PLAYLIST', JSON.stringify(pl));
+    let cnt = 1;
+    for (let x of pl) {
+        renderWaitMusic(cnt, x.title, x.singer, x.songLength);
+        cnt++;
+    }
+}
+
+renderWaitItem();
+
+// export default wait;
