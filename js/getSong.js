@@ -48,9 +48,14 @@ async function recommendSongs(btn) {
     try {
         const resultText = await generateText("맑은 날씨에 맞는 노래 10곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마");
         let arr = resultText.split(",");
-        let result = arr.map(arr => arr.split("-"));
+        // "가수-제목" 형식이 아닌 항목(하이픈 없음, 빈 값)은 제외
+        let result = arr.map(arr => arr.split("-")).filter(x => x.length >= 2 && x[0].trim() && x[1].trim());
         const stk = await Promise.all(
-            result.map(x => getYTDatas(`${x[0].trim()} ${x[1].trim()}`))
+            // 한 곡이 실패(429 등)해도 전체가 중단되지 않도록 null로 대체
+            result.map(x => getYTDatas(`${x[0].trim()} ${x[1].trim()}`).catch(err => {
+                console.warn('YouTube 검색 실패:', x, err);
+                return null;
+            }))
         );
         console.log(JSON.stringify(stk));
         window.localStorage.setItem('songs', JSON.stringify(stk));

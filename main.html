@@ -44,12 +44,21 @@
         <script>
           var canvas = document.getElementById("canvas");
           var ctx = canvas.getContext("2d");
-          var radius = canvas.height / 2;
+          var size = canvas.height;
+          // 고해상도 화면에서 흐려지지 않도록 비트맵을 dpr배로 키우고 CSS 크기는 유지
+          var dpr = window.devicePixelRatio || 1;
+          canvas.style.width = size + "px";
+          canvas.style.height = size + "px";
+          canvas.width = size * dpr;
+          canvas.height = size * dpr;
+          ctx.scale(dpr, dpr);
+          var radius = size / 2;
           ctx.translate(radius, radius);
           radius = radius * 0.9;
           setInterval(drawClock, 1000);
 
           function drawClock() {
+            ctx.clearRect(-size / 2, -size / 2, size, size);
             drawFace(ctx, radius);
             drawNumbers(ctx, radius);
             drawTime(ctx, radius);
