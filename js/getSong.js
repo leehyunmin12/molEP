@@ -39,24 +39,42 @@ async function generateText(promptAI) {
 }
 
 const getSongBtn = document.getElementById("song-btn")
+const againBtn = document.querySelector(".again-recommend")
 
-getSongBtn.addEventListener("click", async () => {
-    document.getElementById('song-btn').innerText = "로딩 중...."
+async function recommendSongs(btn) {
+    const originText = btn.innerText
+    btn.innerText = "로딩 중...."
 
-    const resultText = await generateText("맑은 날씨에 맞는 노래 3곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마");
-    let arr = resultText.split(",");
-    let result = arr.map(arr => arr.split("-"));
-    const stk = await Promise.all(
-        result.map(x => getYTDatas(`${x[0].trim()} ${x[1].trim()}`))
-    );
-    console.log(stk);
-    console.log(result);
-    // arr = arr.toString().split("\n");
-    console.log(JSON.stringify(stk));
-    window.localStorage.setItem('songs', JSON.stringify(stk));
-    window.localStorage.setItem('result', JSON.stringify(result));
-    location.href = 'main.html';
-});
+    try {
+        const resultText = await generateText("맑은 날씨에 맞는 노래 10곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마");
+        let arr = resultText.split(",");
+        let result = arr.map(arr => arr.split("-"));
+        const stk = await Promise.all(
+            result.map(x => getYTDatas(`${x[0].trim()} ${x[1].trim()}`))
+        );
+        console.log(JSON.stringify(stk));
+        window.localStorage.setItem('songs', JSON.stringify(stk));
+        window.localStorage.setItem('result', JSON.stringify(result));
+        location.href = 'main.html';
+    } catch (e) {
+        console.error('노래 추천 실패:', e);
+        btn.innerText = originText
+        // 실패해도 main.html로는 이동
+        // location.href = 'main.html';
+    }
+}
+
+if (getSongBtn) {
+    getSongBtn.addEventListener("click", () => recommendSongs(getSongBtn))
+}
+
+// main.html의 다시 추천받기 버튼
+if (againBtn) {
+    againBtn.addEventListener("click", (e) => {
+        e.preventDefault()
+        recommendSongs(againBtn)
+    })
+}
 
 async function getYTDatas(query) {
     const params = new URLSearchParams({

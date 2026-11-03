@@ -1,3 +1,7 @@
+import config from "./config.js";
+
+const { YOUTUBE_DATA_API_KEY } = config;
+// ----------------------------- 초깃값 형성----------------------
 const musics = window.localStorage.getItem('songs');
 const result = window.localStorage.getItem('result');
 
@@ -18,7 +22,20 @@ for (let i = 0; i < info.length; i++) {
 }
 console.log(playlist);
 window.localStorage.setItem('PLAYLIST', JSON.stringify(playlist));
-// ----------------------------- 초깃값 형성----------------------
+// -----------------------------영상 길이부분----------------------------------------
+
+async function songDuration(vI) {
+    const vParam = new URLSearchParams({
+        key: YOUTUBE_DATA_API_KEY,
+        id: vI,
+        part: 'contentDetails',
+    })
+    const vRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?${vParam}`);
+    const vData = await vRes.json();
+    return vData;
+}
+console.log(songDuration('59y92uRqV7g'));
+// console.log(vData);
 // ----------------------------- 화면에 뿌리기 -------------------
 
 function renderWaitMusic(num, song, singer, time) {
@@ -79,8 +96,8 @@ function renderWaitItem() {
         renderWaitMusic(cnt, x.title, x.singer, x.songLength);
         cnt++;
     }
-}   
+}
 
 renderWaitItem();
- 
+
 // export default wait;

@@ -3,6 +3,76 @@
 <html lang="ko">
   <head>
     <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>몰ep</title>
+    <style>
+      body {
+        margin: 0;
+        background-color: #1a1a18;
+      }
+
+      /* 폰 화면 크기의 로딩 화면: 내용을 세로로 쌓고 정중앙에 배치 */
+      .loading {
+        width: 390px;
+        max-width: 100%;
+        height: 100vh;
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 28px;
+        background-color: #f7f6f2;
+        color: #1a1a18;
+      }
+
+      .loading-logo {
+        margin: 0;
+        font-size: 36px;
+      }
+
+      .loading-logo span {
+        font-size: 22px;
+        font-weight: normal;
+      }
+
+      /* 스피너: 테두리 한 쪽만 색을 다르게 한 원을 회전시킨다 */
+      .spinner {
+        width: 44px;
+        height: 44px;
+        border: 4px solid #dddcd6; /* 연한 회색 바탕 링 */
+        border-top-color: #d96a2b; /* 위쪽만 주황색 -> 도는 호 */
+        border-radius: 50%; 
+        animation: spin 0.9s linear infinite;
+      }
+
+      .loading-text {
+        margin: 0;
+        font-size: 15px;
+        color: #55544f;
+      }
+
+      /* 글자 뒤에 점(.)을 붙이고, 점 개수를 애니메이션으로 바꾼다 */
+      .loading-text::after {
+        content: "";
+        animation: dots 1.5s steps(4, end) infinite; /* 4단계로 끊어서 변경 */
+      }
+
+      /* spin: 0도(기본)에서 360도까지 한 바퀴 회전 */
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* dots: 구간마다 점이 0개 -> 1개 -> 2개 -> 3개로 늘어남 */
+      @keyframes dots {
+        0% { content: ""; }
+        25% { content: "."; }
+        50% { content: ".."; }
+        75% { content: "..."; }
+      }
+    </style>
   </head>
   <body>
     <script type="module">
@@ -65,6 +135,10 @@
         options,
       );
     </script>
-    <h1 style="text-align: center">날씨 확인 중....</h1>
+    <div class="loading">
+      <h1 class="loading-logo">몰<span>ep</span></h1>
+      <div class="spinner"></div>
+      <p class="loading-text">날씨 확인 중</p>
+    </div>
   </body>
 </html>

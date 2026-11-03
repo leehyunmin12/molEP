@@ -10,6 +10,7 @@ let player;
 
 let songs = localStorage.getItem('present');
 songs = JSON.parse(songs);
+console.log(songs);
 
 function onYouTubeIframeAPIReady() {
     player = new YT.Player('player', {
