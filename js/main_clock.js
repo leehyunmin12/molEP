@@ -1,4 +1,4 @@
-let time = 5;
+let time = 10;
 let studyTotal = time;
 let Timer;
 let restTime = 600;
@@ -65,6 +65,7 @@ document.getElementById("reset-button").addEventListener("click", () => {
   document.getElementById("start-button").innerText = "시작";
   document.querySelector(".clock-remain").innerText =
     `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
+  document.querySelector(".clock-studying").innerText = '공부 시간 · 50분 중';
   document.querySelector(".study-time").innerText =
     `쉬는시간까지 · ${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")} 남음`;
   time--;
