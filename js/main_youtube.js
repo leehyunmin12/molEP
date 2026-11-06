@@ -1,4 +1,8 @@
-//import wait from "./main_wait";
+import { renderWaitItem } from "./main_wait.js";
+
+// 전역으로 노출
+window.onYouTubeIframeAPIReady = onYouTubeIframeAPIReady;
+window.onStateChange = onStateChange;
 
 // api 그 설명서에 나온 기본 설정
 let tag = document.createElement('script');
@@ -8,11 +12,12 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
 let player;
 
-let songs = localStorage.getItem('present');
-songs = JSON.parse(songs);
-console.log(songs);
-
 function onYouTubeIframeAPIReady() {
+    const songs = JSON.parse(localStorage.getItem('present'));
+    // 재생할 곡이 없으면 플레이어를 만들지 않음
+    if (!songs) {
+        return;
+    }
     player = new YT.Player('player', {
         // 화면 크기 조정
         height: '180',
@@ -24,7 +29,8 @@ function onYouTubeIframeAPIReady() {
         },
         events: {
             'onReady': onPlayerReady,
-            'onStateChange': onPlayerStateChange
+            'onStateChange': onPlayerStateChange,
+            'onError': onPlayerError 
         }
     });
 }
@@ -121,5 +127,14 @@ function current_setting() {
 // 스크롤에서 해당 위치로 연결해주는 거
 const seekBar = document.querySelector('#seekBar');
 seekBar.addEventListener('input', function () {
-    player.seekTo(seekBar.value, state);
+    if (player) {
+        player.seekTo(seekBar.value, state);
+    }
 });
+function onPlayerError(event) {
+    // 100: 영상 없음/비공개, 101·150: 퍼가기 금지
+    if (event.data === 100 || event.data === 101 || event.data === 150) {
+        renderWaitItem();
+        playPresent();
+    }
+}
