@@ -13,6 +13,8 @@ const length = music.length - 1;
 const playlist = [];
 
 for (let i = 0; i < info.length; i++) {
+    // 유튜브 검색에 실패한 곡은 건너뜀
+    if (!music[i]) continue;
     let object = {};
     object["title"] = info[i][1];
     object["singer"] = info[i][0];
@@ -98,6 +100,7 @@ function renderWaitItem() {
     }
 }
 
+
 renderWaitItem();
 
-// export default wait;
+export { renderWaitItem };
