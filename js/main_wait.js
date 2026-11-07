@@ -93,6 +93,9 @@ function renderWaitItem() {
     let present = pl.shift();
     window.localStorage.setItem('present', JSON.stringify(present));
     window.localStorage.setItem('PLAYLIST', JSON.stringify(pl));
+    // 현재 곡의 제목/가수 표시도 여기서 갱신 (main.html 인라인 스크립트는 새 곡이 저장되기 전에 실행됨)
+    document.getElementById('song').textContent = present.title;
+    document.getElementById('singer').textContent = present.singer;
     let cnt = 1;
     for (let x of pl) {
         renderWaitMusic(cnt, x.title, x.singer, x.songLength);

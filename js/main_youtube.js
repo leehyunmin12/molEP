@@ -13,11 +13,8 @@ firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 let player;
 
 function onYouTubeIframeAPIReady() {
+    // 페이지 로딩 시점이 아니라 API가 준비된 뒤에 읽어야, main_wait.js가 저장한 새 첫 곡을 가져옴
     const songs = JSON.parse(localStorage.getItem('present'));
-    // 재생할 곡이 없으면 플레이어를 만들지 않음
-    if (!songs) {
-        return;
-    }
     player = new YT.Player('player', {
         // 화면 크기 조정
         height: '180',
