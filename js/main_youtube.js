@@ -141,10 +141,3 @@ seekBar.addEventListener('input', function () {
         player.seekTo(seekBar.value, state);
     }
 });
-function onPlayerError(event) {
-    // 100: 영상 없음/비공개, 101·150: 퍼가기 금지
-    if (event.data === 100 || event.data === 101 || event.data === 150) {
-        renderWaitItem();
-        playPresent();
-    }
-}
