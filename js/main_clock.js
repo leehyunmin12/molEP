@@ -15,13 +15,6 @@ document.getElementById("start-button").addEventListener("click", function () {
           )
             .toString()
             .padStart(2, "0")}:${(time % 60).toString().padStart(2, "0")}`;
-          document.querySelector(".study-time").innerText =
-            `쉬는시간까지 · ${Math.floor(time / 60)
-              .toString()
-              .padStart(
-                2,
-                "0",
-              )}:${(time % 60).toString().padStart(2, "0")} 남음`;
           window.ringProgress = (studyTotal - time) / studyTotal;
           window.ringColor = "#ff6b6b";
           time--;
@@ -37,13 +30,6 @@ document.getElementById("start-button").addEventListener("click", function () {
 
           document.querySelector(".clock-remain").innerText =
             `${Math.floor(restTime / 60)}:${(restTime % 60).toString().padStart(2, "0")}`;
-          document.querySelector(".study-time").innerText =
-            `공부시간까지 · ${Math.floor(restTime / 60)
-              .toString()
-              .padStart(
-                2,
-                "0",
-              )}:${(restTime % 60).toString().padStart(2, "0")} 남음`;
           window.ringProgress = (600 - restTime) / 600;
           window.ringColor = "#4dabf7";
           restTime--;
@@ -66,7 +52,5 @@ document.getElementById("reset-button").addEventListener("click", () => {
   document.querySelector(".clock-remain").innerText =
     `${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")}`;
   document.querySelector(".clock-studying").innerText = '공부 시간 · 50분 중';
-  document.querySelector(".study-time").innerText =
-    `쉬는시간까지 · ${Math.floor(time / 60)}:${(time % 60).toString().padStart(2, "0")} 남음`;
   time--;
 });

@@ -56,13 +56,16 @@ body {
 
 }
 
-.study-time {
+.logo {
     color: var(--text);
-    font-size: 15px;
-    padding: 6px 12px;
-    background-color: var(--div-bg);
-    border: solid 1px var(--text);
-    border-radius: 8px;
+    font-size: 22px;
+    font-weight: bold;
+    margin-right: 40px; /* 오른쪽 끝에서 왼쪽으로 띄움 */
+}
+
+.logo span {
+    font-size: 14px;
+    font-weight: normal;
 }
 
 /* --------------------------------- pomodoro-card 부분 --------------------------------- */
@@ -199,7 +202,8 @@ body {
 
 .again-recommend {
     color: var(--text-blur);
-    text-decoration: none;
+    text-decoration: underline;
+    cursor: pointer;
     font-size: 12px;
 }
 

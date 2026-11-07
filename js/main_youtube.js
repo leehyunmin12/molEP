@@ -23,7 +23,7 @@ function onYouTubeIframeAPIReady() {
         height: '180',
         width: '300',
         // 어느 영상인지 구분하는 Id
-        videoId: songs.videoId,
+        videoId: songs ? songs.videoId : undefined,
         playerVars: {
             'playsinLine': 1
         },
@@ -55,6 +55,13 @@ function onPlayerStateChange(event) {
         renderWaitItem();
         playPresent();
     }
+}
+
+// 재생할 수 없는 영상(퍼가기 금지, 삭제, 지역/연령 제한 등)이면 다음 곡으로 넘김
+function onPlayerError(event) {
+    console.warn('재생 불가 영상, 다음 곡으로 넘어갑니다. 오류 코드:', event.data);
+    renderWaitItem();
+    playPresent();
 }
 
 // present에 저장된 곡으로 영상, 제목, 가수 바꾸기

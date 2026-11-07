@@ -1,0 +1,7 @@
+const config = {
+  API_KEY: "YOUR_API_KEY",
+  OPEN_WEATHER_API_KEY: "YOUR_OPEN_WEATHER_API_KEY",
+  YOUTUBE_DATA_API_KEY: "YOUR_YOUTUBE_DATA_API_KEY",
+};
+
+export default config;

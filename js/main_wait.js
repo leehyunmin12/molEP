@@ -102,5 +102,7 @@ function renderWaitItem() {
 
 
 renderWaitItem();
+// 모듈 밖(main_youtube.js)에서 곡이 끝날 때 호출할 수 있도록 전역에 노출
+window.renderWaitItem = renderWaitItem;
 
 export { renderWaitItem };
