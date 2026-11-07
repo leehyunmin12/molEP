@@ -13,7 +13,7 @@ const length = music.length - 1;
 const playlist = [];
 
 for (let i = 0; i < info.length; i++) {
-    // YouTube 검색에 실패해 null이 된 곡은 건너뜀
+    // 유튜브 검색에 실패한 곡은 건너뜀
     if (!music[i]) continue;
     let object = {};
     object["title"] = info[i][1];
@@ -103,8 +103,9 @@ function renderWaitItem() {
     }
 }
 
+
 renderWaitItem();
 // 모듈 밖(main_youtube.js)에서 곡이 끝날 때 호출할 수 있도록 전역에 노출
 window.renderWaitItem = renderWaitItem;
 
-// export default wait;
+export { renderWaitItem };
