@@ -29,12 +29,12 @@ async function generateText(promptAI) {
 
         // API 응답 객체에서 텍스트 결과만 추출
         const resultText = data.candidates[0].content.parts[0].text;
-        console.log(resultText);
+        // console.log(resultText);
         return resultText;
 
     } catch (error) {
-        console.error('Gemini API 호출 중 오류 발생:', error);
-        throw error;
+        throw new Error(`Jemini 호출 중 에러 발생 ${response.status}`);
+
     }
 }
 
@@ -46,7 +46,13 @@ async function recommendSongs(btn) {
     btn.innerText = "로딩 중...."
 
     try {
-        const resultText = await generateText("맑은 날씨에 맞는 노래 10곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마");
+        const weather = JSON.parse(sessionStorage.getItem("WeatherData")).weather[0].description;
+        // 날씨 화면에서 고른 장르를 저장해 두어, main.html의 다시 추천받기에서도 유지
+        const genreSelect = document.getElementById("genre");
+        if (genreSelect) localStorage.setItem("genre", genreSelect.value);
+        const genre = localStorage.getItem("genre");
+        const genreText = genre ? ` ${genre} 장르의` : "";
+        const resultText = await generateText(`${weather} 날씨에 맞는${genreText} 노래 10곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마`);
         let arr = resultText.split(",");
         // "가수-제목" 형식이 아닌 항목(하이픈 없음, 빈 값)은 제외
         let result = arr.map(arr => arr.split("-")).filter(x => x.length >= 2 && x[0].trim() && x[1].trim());

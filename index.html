@@ -94,14 +94,14 @@
       }
 
       const getSuccess = async (position) => {
-        console.log(position);
+        // console.log(position);
         const lon = position.coords.longitude;
         const lat = position.coords.latitude;
 
         console.log(lon, lat);
         const OPEN_WEATHER_URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${OPEN_WEATHER_API_KEY}&units=metric&lang=kr`;
 
-        console.log(OPEN_WEATHER_URL);
+        // console.log(OPEN_WEATHER_URL);
 
         try {
           const response = await fetch(OPEN_WEATHER_URL);

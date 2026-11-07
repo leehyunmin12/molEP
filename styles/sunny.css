@@ -64,6 +64,17 @@ body {
     font-size: 10px;
 }
 
+#genre {
+    width: 260px;
+    height: 40px;
+    margin-top: 16px;
+    padding: 0 8px;
+    background-color: #fff;
+    border: solid 1px #000;
+    border-radius: 8px;
+    font-size: 14px;
+}
+
 #song-btn {
     width: 260px;
     height: 48px;

@@ -29,7 +29,7 @@
           </svg>
           처음으로
         </a>
-        <div class="study-time">쉬는시간까지 · 50:00 남음</div>
+        <div class="logo">몰<span>ep</span></div>
       </div>
 
       <div class="card" id="pomodoro-card">
@@ -205,10 +205,13 @@
   <script src="./js/main_youtube.js"></script>
   <script src="./js/main_pomodoro.js"></script>
   <script type="module" src="./js/main_wait.js"></script>
+  <script type="module" src="./js/getSong.js"></script>
   <script>
     let p = window.localStorage.getItem('present');
     p = JSON.parse(p);
-    document.getElementById('song').textContent = p.title;
-    document.getElementById('singer').textContent = p.singer;
+    if (p) {
+      document.getElementById('song').textContent = p.title;
+      document.getElementById('singer').textContent = p.singer;
+    }
   </script>
 </html>
