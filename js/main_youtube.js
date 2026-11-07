@@ -62,6 +62,12 @@ function onPlayerError(event) {
 // present에 저장된 곡으로 영상, 제목, 가수 바꾸기
 function playPresent() {
     let present = JSON.parse(localStorage.getItem('present'));
+    // videoId가 없는 항목은 재생할 수 없으므로 다음 곡으로 건너뜀
+    while (present && !present.videoId) {
+        console.warn('videoId 없는 곡을 건너뜁니다:', present);
+        renderWaitItem();
+        present = JSON.parse(localStorage.getItem('present'));
+    }
     // 대기열이 다 끝났으면 멈춤
     if (!present) {
         return;
