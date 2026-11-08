@@ -18,7 +18,7 @@ for (let i = 0; i < info.length; i++) {
     let object = {};
     object["title"] = info[i][1];
     object["singer"] = info[i][0];
-    object["songLength"] = "2:34";
+    object["songLength"] = await songDuration(music[i].videoId);
     object["videoId"] = music[i].videoId;
     playlist.push(object);
 }
@@ -34,10 +34,26 @@ async function songDuration(vI) {
     })
     const vRes = await fetch(`https://www.googleapis.com/youtube/v3/videos?${vParam}`);
     const vData = await vRes.json();
-    return vData;
+
+    // 영상 정보가 없으면 "-"
+    if (vData.items.length === 0) return "-";
+
+    // 응답 예: "PT3M25S" -> "3:25"
+    let t = vData.items[0].contentDetails.duration;
+    t = t.replace("PT", "");   // "3M25S"
+    t = t.replace("S", "");    // "3M25"
+
+    let parts = t.split("M");  // ["3", "25"]
+    let min = parts[0];
+    let sec = parts[1];
+
+    // 딱 떨어지는 분이면 초가 없음 (PT3M -> "3:00")
+    if (sec === undefined || sec === "") sec = "00";
+    // 초가 한 자리면 앞에 0 붙이기 (5 -> 05)
+    if (sec.length === 1) sec = "0" + sec;
+
+    return min + ":" + sec;
 }
-console.log(songDuration('59y92uRqV7g'));
-// console.log(vData);
 // ----------------------------- 화면에 뿌리기 -------------------
 
 function renderWaitMusic(num, song, singer, time) {
