@@ -1,6 +1,8 @@
 const raw = sessionStorage.getItem("WeatherData");
 const data = JSON.parse(raw);
 
+console.log(data)
+
 const weather = data.weather[0].description;
 const temp = data.main.temp;
 const humidity = data.main.humidity;
