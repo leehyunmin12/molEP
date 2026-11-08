@@ -53,6 +53,7 @@ async function recommendSongs(btn) {
         const genre = localStorage.getItem("genre");
         const genreText = genre ? ` ${genre} 장르의` : "";
         const resultText = await generateText(`${weather} 날씨에 맞는${genreText} 노래 10곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마`);
+
         let arr = resultText.split(",");
         // "가수-제목" 형식이 아닌 항목(하이픈 없음, 빈 값)은 제외
         let result = arr.map(arr => arr.split("-")).filter(x => x.length >= 2 && x[0].trim() && x[1].trim());
@@ -63,6 +64,7 @@ async function recommendSongs(btn) {
                 return null;
             }))
         );
+        
         console.log(JSON.stringify(stk));
         window.localStorage.setItem('songs', JSON.stringify(stk));
         window.localStorage.setItem('result', JSON.stringify(result));
