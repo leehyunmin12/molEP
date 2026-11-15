@@ -52,7 +52,13 @@ async function recommendSongs(btn) {
         if (genreSelect) localStorage.setItem("genre", genreSelect.value);
         const genre = localStorage.getItem("genre");
         const genreText = genre ? ` ${genre} 장르의` : "";
-        const resultText = await generateText(`${weather} 날씨에 맞는${genreText} 노래 10곡을 추천해줘. 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마`);
+        // 같은 프롬프트면 같은 곡(특히 첫 곡)이 나오므로, 직전에 추천한 곡은 제외하도록 요청
+        let prev = [];
+        try {
+            prev = (JSON.parse(localStorage.getItem("result")) || []).map(x => `${x[0].trim()}-${x[1].trim()}`);
+        } catch (e) { /* 이전 기록이 없거나 깨졌으면 무시 */ }
+        const excludeText = prev.length ? ` 다음 곡들은 제외해줘: ${prev.join(", ")}.` : "";
+        const resultText = await generateText(`${weather} 날씨에 맞는${genreText} 노래 10곡을 추천해줘.${excludeText} 가수-노래제목 형식으로 가져와줘. 한 줄로 ,를 기준으로 가져와줘. 쓸데없는 말은 쓰지마`);
 
         let arr = resultText.split(",");
         // "가수-제목" 형식이 아닌 항목(하이픈 없음, 빈 값)은 제외
