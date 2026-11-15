@@ -1,4 +1,4 @@
-let time = 10;
+let time = 3000;
 let studyTotal = time;
 let Timer;
 let restTime = 600;

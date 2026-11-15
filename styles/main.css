@@ -339,3 +339,7 @@ body {
     display: flex;
     justify-content: right;
 }
+
+.study-time {
+    margin-right: 20px;
+}
